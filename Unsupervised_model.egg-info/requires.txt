@@ -1,0 +1,9 @@
+
+[dev]
+utils
+mypy
+numpy
+pandas
+scikit-learn
+matplotlib
+scipy

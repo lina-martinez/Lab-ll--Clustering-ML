@@ -1,0 +1,7 @@
+Metadata-Version: 2.1
+Name: Unsupervised-model
+Version: 0.1
+Summary: Unsupervised model
+Home-page: https://github.com/lina-martinez/Lab-I---Dimensionality-Reduction
+Requires-Python: >=3.7
+Provides-Extra: dev
