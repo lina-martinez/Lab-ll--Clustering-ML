@@ -10,7 +10,6 @@ n_components = 4
 X, true_labels = make_blobs(
     n_samples=750, centers=n_components, cluster_std=0.4, random_state=0
 )
-
 plt.title("Unclustered Data")
 plt.scatter(X[:, 0], X[:, 1], s=15)
 plt.xticks([])

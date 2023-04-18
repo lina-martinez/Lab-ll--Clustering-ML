@@ -18,6 +18,8 @@ class KMedoids(BaseEstimator, ClusterMixin):
     def fit(self, X):
         n_samples = X.shape[0]
         
+        assert self.n_clusters <= n_samples, "El número de clusters debe ser menor o igual que el número de muestras."
+
         # Initialize medoids randomly
         self.medoids = np.random.choice(n_samples, self.n_clusters, replace=False)
         
@@ -30,10 +32,13 @@ class KMedoids(BaseEstimator, ClusterMixin):
             new_medoids = np.zeros(self.n_clusters, dtype=np.int64)
             for j in range(self.n_clusters):
                 mask = (self.labels == j)
-                cluster_distances = utils.pairwise_distances(X[mask], X[mask])
-                total_distance = np.sum(cluster_distances, axis=1)
-                new_medoids[j] = np.argmin(total_distance)
-                
+                if np.sum(mask) > 0:
+                    cluster_distances = utils.pairwise_distances(X[mask], X[mask])
+                    total_distance = np.sum(cluster_distances, axis=1)
+                    new_medoids[j] = np.argmin(total_distance)
+                else:
+                    new_medoids[j] = self.medoids[j]
+
             # Check for convergence
             if np.all(new_medoids == self.medoids):
                 self.cluster_centers_ = self.medoids
