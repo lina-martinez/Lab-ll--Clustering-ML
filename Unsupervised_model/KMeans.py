@@ -9,6 +9,7 @@ class KMeans:
     def __init__(self, n_clusters, max_iters=1000, tol=1e-5):
         self.n_clusters = n_clusters
         self.max_iters = max_iters
+        self.cluster_centers_ = None
         self.tol = tol
         self.centroids = None
         self.labels = None
@@ -33,6 +34,7 @@ class KMeans:
                 
             # Check for convergence
             if np.sum(np.abs(new_centroids - self.centroids)) < self.tol:
+                self.cluster_centers_ = self.centroids
                 break
                 
             self.centroids = new_centroids

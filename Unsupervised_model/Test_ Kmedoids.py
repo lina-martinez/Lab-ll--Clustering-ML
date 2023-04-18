@@ -17,12 +17,12 @@ plt.xticks([])
 plt.yticks([])
 plt.show()
 
-# Initialize KMeans
-kmeans = KMedoids(n_clusters=4)
+# Initialize KMedoids
+kmedoids = KMedoids(n_clusters=4)
 
 # fit the data & predict cluster labels
-kmeans.fit(X)
-predicted_labels = kmeans.predict(X)
+kmedoids.fit(X)
+predicted_labels = kmedoids.predict(X)
 
 # Based on predicted_labels, we assign each data point distinct colour
 colors = ["#4EACC5", "#FF9C34", "#4E9A06", "m"]

@@ -1,6 +1,8 @@
 import utils
 import numpy as np
+import random
 from sklearn.base import BaseEstimator, ClusterMixin
+
 
 # Trae el calculo de los "get_params" y "set_params"
 class KMedoids(BaseEstimator, ClusterMixin):
@@ -8,6 +10,7 @@ class KMedoids(BaseEstimator, ClusterMixin):
     def __init__(self, n_clusters, max_iters=1000, tol=1e-5):
         self.n_clusters = n_clusters
         self.max_iters = max_iters
+        self.cluster_centers_ = None
         self.tol = tol
         self.medoids = None
         self.labels = None
@@ -33,6 +36,7 @@ class KMedoids(BaseEstimator, ClusterMixin):
                 
             # Check for convergence
             if np.all(new_medoids == self.medoids):
+                self.cluster_centers_ = self.medoids
                 break
                 
             self.medoids = new_medoids
