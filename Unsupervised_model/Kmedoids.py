@@ -3,7 +3,6 @@ import numpy as np
 import random
 from sklearn.base import BaseEstimator, ClusterMixin
 
-
 # Trae el calculo de los "get_params" y "set_params"
 class KMedoids(BaseEstimator, ClusterMixin):
     
@@ -14,6 +13,8 @@ class KMedoids(BaseEstimator, ClusterMixin):
         self.tol = tol
         self.medoids = None
         self.labels = None
+        np.random.seed(123)
+
         
     def fit(self, X):
         n_samples = X.shape[0]

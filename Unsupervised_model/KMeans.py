@@ -2,8 +2,6 @@ import numpy as np
 import utils
 import random
 
-random.seed(1111)
-
 class KMeans:
 
     def __init__(self, n_clusters, max_iters=1000, tol=1e-5):
@@ -13,6 +11,8 @@ class KMeans:
         self.tol = tol
         self.centroids = None
         self.labels = None
+        np.random.seed(123)
+
 
     def fit(self,X):
         n_samples  = X.shape[0]
