@@ -1,11 +1,14 @@
 import numpy as np
 
-def pairwise_distances(self, X):
+def pairwise_distances(X, Y=None):
     """
-    Computes pairwise distances between samples in X.
+    Computes the pairwise distances between each pair of data points in the X matrix
     """
+    if Y is None:
+        Y = X
+        
     # Compute squared distances
-    distance = np.sum(X**2, axis=1, keepdims=True) + np.sum(X**2, axis=1) - 2 * np.dot(X, X.T)
+    distance = np.sum(X**2, axis=1, keepdims=True) + np.sum(Y**2, axis=1) - 2 * np.dot(X, Y.T)
 
     # Replace negative values with 0 (due to floating point errors)
     distance[distance < 0] = 0
@@ -13,6 +16,15 @@ def pairwise_distances(self, X):
     # Take the square root to obtain Euclidean distances
     distance = np.sqrt(distance)
     return distance
+
+def distances(self, X):
+    '''
+    Computes the distance between each point in X and each centroid in self.centroids
+    '''
+    distances = np.zeros((X.shape[0], self.n_clusters))
+    for i, centroid in enumerate(self.centroids):
+        distances[:, i] = np.linalg.norm(X - centroid, axis=1)
+    return distances
 
 def normalize(self, X):
     """
@@ -74,3 +86,4 @@ def compute_gradient(self, probability , Q , Y, distance):
     factor = 4 * (probability - Q)[:,:,np.newaxis] * Y_diff * (1 / (1 + distance**2))[:,:,np.newaxis]
     grad = np.sum(factor, axis=1)
     return grad
+
