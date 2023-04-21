@@ -1,10 +1,8 @@
 import utils
 import numpy as np
 import random
-from sklearn.base import BaseEstimator, ClusterMixin
 
-# Trae el calculo de los "get_params" y "set_params"
-class KMedoids(BaseEstimator, ClusterMixin):
+class KMedoids:
     
     def __init__(self, n_clusters, max_iters=1000, tol=1e-5):
         self.n_clusters = n_clusters
@@ -15,11 +13,10 @@ class KMedoids(BaseEstimator, ClusterMixin):
         self.labels = None
         np.random.seed(123)
 
-        
     def fit(self, X):
         n_samples = X.shape[0]
         
-        assert self.n_clusters <= n_samples, "El número de clusters debe ser menor o igual que el número de muestras."
+        assert self.n_clusters <= n_samples
 
         # Initialize medoids randomly
         self.medoids = np.random.choice(n_samples, self.n_clusters, replace=False)
